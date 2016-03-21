@@ -1,0 +1,4 @@
+services:
+    m7_menu.menu.renderer:
+        class: Module7\MenuBundle\Util\Menu\MenuRenderer
+        arguments: [ "@templating" ]

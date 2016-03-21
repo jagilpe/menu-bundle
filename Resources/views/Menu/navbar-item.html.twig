@@ -1,0 +1,26 @@
+{% set link = menu_item.route ? path(menu_item.route, menu_item.routeParams) : '#' %}
+{% set children = menu_item.hideChildren ? [] : menu_item.menuItems %}
+{% set classes = (menu_item.attributes and menu_item.attributes.class) ? (menu_item.attributes.class is iterable ? menu_item.attributes.class : [menu_item.attributes.class]) : [] %}
+{% set classes = menu_item.active ? classes|merge(['active']) : classes %}
+{% if translation_domain is not defined %}
+	{% set translation_domain = 'menu' %}
+{% endif %}
+{% trans_default_domain translation_domain %}
+
+{% if children %}
+<li class="dropdown{% if classes %} {{ classes|join(' ') }}{% endif %}">
+	<a href="{{ link }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	    {{ menu_item.name|trans({}, 'menu') }} <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	{% for menu_child in children %}
+      {# Include the template for the menu item element #}
+      {% include 'Module7MenuBundle:Menu:navbar-item.html.twig' with {'menu_item' : menu_child} %}
+      {% endfor %}
+	</ul>
+</li>
+{% else %}
+<li {% if classes %}class="{{ classes|join(' ') }}"{% endif %}>
+	<a href="{{ link }}">{{ menu_item.name|trans }}</a>
+</li>
+{% endif %}
