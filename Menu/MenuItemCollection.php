@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Util\Menu;
+namespace Module7\MenuBundle\Menu;
 
 interface MenuItemCollection
 {
@@ -8,7 +8,7 @@ interface MenuItemCollection
     /**
      * Adds menu item at the end of the collection.
      *
-     * @param Module7\MenuBundle\Utils\Menu\MenuItem $menu_item The menu item to add.
+     * @param Module7\MenuBundle\Menu\MenuItem $menu_item The menu item to add.
      *
      * @return boolean Always TRUE.
      */
@@ -25,7 +25,7 @@ interface MenuItemCollection
      * Checks whether menu item is contained in the collection.
      * This is an O(n) operation, where n is the size of the collection.
      *
-     * @param Module7\MenuBundle\Utils\Menu\MenuItem $menu_item The element to search for.
+     * @param Module7\MenuBundle\Menu\MenuItem $menu_item The element to search for.
      *
      * @return boolean TRUE if the collection contains the menu item, FALSE otherwise.
      */
@@ -43,7 +43,7 @@ interface MenuItemCollection
      *
      * @param string|integer $key The kex/index of the menu item to remove.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem The removed menu item or NULL,
+     * @return Module7\MenuBundle\Menu\MenuItem The removed menu item or NULL,
      *  if the collection did not contain the element.
      */
     public function remove($key);
@@ -51,7 +51,7 @@ interface MenuItemCollection
     /**
      * Removes the specified menu item from the collection, if it is found.
      *
-     * @param Module7\MenuBundle\Utils\Menu\MenuItem $menu_item The menu item to remove.
+     * @param Module7\MenuBundle\Menu\MenuItem $menu_item The menu item to remove.
      *
      * @return boolean TRUE if this collection contained the specified menu item, FALSE otherwise.
      */
@@ -72,7 +72,7 @@ interface MenuItemCollection
      *
      * @param string|integer $key The key/index of the menu item to retrieve.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem
+     * @return Module7\MenuBundle\Menu\MenuItem
      */
     public function get($key);
 
@@ -96,7 +96,7 @@ interface MenuItemCollection
      * Sets an menu item in the collection at the specified key/index.
      *
      * @param string|integer $key   The key/index of the menu item to set.
-     * @param Module7\MenuBundle\Utils\Menu\MenuItem  $value The menu item to set.
+     * @param Module7\MenuBundle\Menu\MenuItem  $value The menu item to set.
      *
      * @return void
      */
@@ -112,14 +112,14 @@ interface MenuItemCollection
     /**
      * Sets the internal iterator to the first menu item in the collection and returns this menu item.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem
+     * @return Module7\MenuBundle\Menu\MenuItem
      */
     public function first();
 
     /**
      * Sets the internal iterator to the last menu item in the collection and returns this menu item.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem
+     * @return Module7\MenuBundle\Menu\MenuItem
      */
     public function last();
 
@@ -133,14 +133,14 @@ interface MenuItemCollection
     /**
      * Gets the menu item of the collection at the current iterator position.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem
+     * @return Module7\MenuBundle\Menu\MenuItem
      */
     public function current();
 
     /**
      * Moves the internal iterator position to the next menu item and returns this menu item.
      *
-     * @return Module7\MenuBundle\Utils\Menu\MenuItem
+     * @return Module7\MenuBundle\Menu\MenuItem
      */
     public function next();
 
@@ -199,7 +199,7 @@ interface MenuItemCollection
      * that means not only the value but also the type must match.
      * For objects this means reference equality.
      *
-     * @param Module7\MenuBundle\Utils\Menu\MenuItem $menu_item The menu item to search for.
+     * @param Module7\MenuBundle\Menu\MenuItem $menu_item The menu item to search for.
      *
      * @return int|string|bool The key/index of the menu item or FALSE if the menu item was not found.
      */

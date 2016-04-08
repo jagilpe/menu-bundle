@@ -4,9 +4,10 @@
  * Auxiliary class for building application menus
  */
 
-namespace Module7\MenuBundle\Util\Menu;
+namespace Module7\MenuBundle\Renderer;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Module7\MenuBundle\Menu\Menu;
 
 /**
  * This class is used to get a rendered menu using different templates and options
@@ -45,6 +46,8 @@ class MenuRenderer
                 );
                 return $this->renderNLevelMenu($menu, $options['level'], $options);
                 break;
+            case 'custom':
+                return $this->renderCustomMenu($menu, $options);
             default:
                 throw new \RuntimeException('Menu view ' . $view . ' not supported.');
         }
@@ -53,11 +56,10 @@ class MenuRenderer
     /**
      * Returns a rendered block for a full functional menu
      *
-     * @param Module7\MenuBundle\Util\Menu\Menu
+     * @param Module7\MenuBundle\Menu\Menu
      */
     private function renderFullMenu(Menu $menu, $options = array())
     {
-
         // Set the default options
         $options += array(
             'id' => 'full-menu',
@@ -78,7 +80,7 @@ class MenuRenderer
     /**
      * Returns a renderd block for the first level elements of the menu
      *
-     * @param Module7\MenuBundle\Util\Menu\Menu
+     * @param Module7\MenuBundle\Menu\Menu
      */
     private function renderFirstLevelMenu(Menu $menu, $options = array())
     {
@@ -88,7 +90,7 @@ class MenuRenderer
     /**
      * Returns a rendered block corresponding to the n-level of the menu
      *
-     * @param Module7\MenuBundle\Util\Menu\Menu $menu
+     * @param Module7\MenuBundle\Menu\Menu $menu
      * @param integer $level
      */
     private function renderNLevelMenu(Menu $menu, $level, $options = array())
@@ -124,12 +126,34 @@ class MenuRenderer
     }
 
     /**
+     * Renders the menu with a template suitable for mobiles and tablets
+     *
+     * @param Menu $menu
+     * @param arrazy $options
+     */
+    private function renderCustomMenu(Menu $menu, $options)
+    {
+        // Get the template to use
+        if (isset($options['template'])) {
+            $template = $options['template'];
+
+            return $this->templating->renderResponse(
+                $template,
+                array('menu' => $menu, 'params' => $options)
+            );
+        }
+        else {
+            throw new \RuntimeException('Menu template not specified.');
+        }
+    }
+
+    /**
      * Gets the submenu in the selected level following the active trail
      *
-     * @param Module7\MenuBundle\Util\Menu\MenuItem $menu_item
+     * @param Module7\MenuBundle\Menu\MenuItem $menu_item
      * @param integer $level
      *
-     * @return Module7\MenuBundle\Util\Menu\Menu
+     * @return Module7\MenuBundle\Menu\Menu
      */
     private function getRenderMenuItem(MenuItem $menu_item, $level)
     {

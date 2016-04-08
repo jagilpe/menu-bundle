@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Util\Menu;
+namespace Module7\MenuBundle\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -9,9 +9,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class Menu
 {
-
     /**
-     * @var Module7\CommonsBundle\Util\Menu\MenuItemCollection
+     * @var Module7\CommonsBundle\Menu\MenuItemCollection
      */
     private $rootContainer;
 
@@ -29,7 +28,7 @@ class Menu
     /**
      * Returns the root container of the menu
      *
-     * @return Module7\CommonsBundle\Util\Menu\MenuItemCollection
+     * @return Module7\CommonsBundle\Menu\MenuItemCollection
      */
     public function getRootContainer()
     {
@@ -39,7 +38,7 @@ class Menu
     /**
      * Sets the root container of the menu
      *
-     * @param Module7\CommonsBundle\Util\Menu\MenuItemCollection $root_container
+     * @param Module7\CommonsBundle\Menu\MenuItemCollection $root_container
      */
     public function setRootContainer(MenuItemCollection $root_container)
     {
@@ -132,6 +131,5 @@ class Menu
         $this->translationDomain = $translationDomain;
         return $this;
     }
-
 
 }

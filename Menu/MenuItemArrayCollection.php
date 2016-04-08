@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Util\Menu;
+namespace Module7\MenuBundle\Menu;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

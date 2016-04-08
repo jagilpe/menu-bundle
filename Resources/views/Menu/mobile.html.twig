@@ -1,0 +1,36 @@
+{% set translation_domain = menu.translationDomain %}
+{% trans_default_domain translation_domain %}
+
+{% block main_menu %}
+{% if (menu.attributes) and (menu.attributes.class) %}
+    {% set classes = menu.attributes.class %}
+{% else %}
+    {% set classes = false %}
+{% endif %}
+<nav id="{{ params.id }}" class="navbar navbar-default{% if classes %} {{ classes|join(' ')}}{% endif %}">
+  <div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ params.id }}-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      {% block home_link %}
+          <a class="navbar-brand visible-xs-block" href="{{ path('home') }}">{{ 'site.name'|trans }}</a>
+      {% endblock %}
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="{{ params.id }}-navbar-collapse">
+      <ul class="nav navbar-nav">
+      {% for menu_item in menu.rootContainer.menuItems %}
+      {# Include the template for the menu item element #}
+      {% include 'Module7MenuBundle:Menu:navbar-item.html.twig' with {'menu_item' : menu_item} %}
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}

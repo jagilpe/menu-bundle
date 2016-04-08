@@ -1,4 +1,9 @@
 services:
     m7_menu.menu.renderer:
-        class: Module7\MenuBundle\Util\Menu\MenuRenderer
+        class: Module7\MenuBundle\Renderer\MenuRenderer
         arguments: [ "@templating" ]
+    m7_menu.menu_builder.factory:
+        class: Module7\MenuBundle\Factory\MenuBuilderFactory
+        arguments:
+          - "@request_stack"
+          - "@router"

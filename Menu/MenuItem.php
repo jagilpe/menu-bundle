@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Util\Menu;
+namespace Module7\MenuBundle\Menu;
 
 class MenuItem extends MenuItemArrayCollection
 {
@@ -58,16 +58,18 @@ class MenuItem extends MenuItemArrayCollection
     /**
      * Initializes the MenuItem
      */
-    public function __construct()
+    public function __construct($options = array())
     {
         parent::__construct();
 
         // Set the default values
-        $this->description = null;
-        $this->route = null;
-        $this->active = false;
-        $this->disabled = false;
-        $this->hideChildren = false;
+        $this->description = isset($options['description']) ? $options['description'] : null;
+        $this->route = isset($options['route']) ? $options['route'] : null;
+        $this->name = isset($options['name']) ? $options['name'] : null;
+        $this->attributes = isset($options['attributes']) ? $options['attributes'] : null;
+        $this->active = isset($options['active']) ? $options['active'] : false;
+        $this->disabled = isset($options['disabled']) ? $options['disabled'] : false;
+        $this->hideChildren = isset($options['hideChildren']) ? $options['hideChildren'] : false;
     }
 
     /**
