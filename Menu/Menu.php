@@ -5,7 +5,7 @@ namespace Module7\MenuBundle\Menu;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
 class Menu
 {

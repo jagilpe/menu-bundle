@@ -2,6 +2,9 @@
 
 namespace Module7\MenuBundle\Menu;
 
+/**
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
+ */
 class MenuItem extends MenuItemArrayCollection
 {
 

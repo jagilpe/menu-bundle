@@ -1,7 +1,4 @@
 <?php
-/**
- * Menu builder factory
- */
 
 namespace Module7\MenuBundle\Factory;
 
@@ -9,6 +6,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Module7\MenuBundle\Menu\MenuBuilder;
 
+/**
+ * Menu builder factory
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
+ */
 class MenuBuilderFactory
 {
     private $requestStack;

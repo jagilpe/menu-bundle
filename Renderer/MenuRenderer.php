@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Auxiliary class for building application menus
- */
-
 namespace Module7\MenuBundle\Renderer;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -11,6 +7,8 @@ use Module7\MenuBundle\Menu\Menu;
 
 /**
  * This class is used to get a rendered menu using different templates and options
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
 class MenuRenderer
 {

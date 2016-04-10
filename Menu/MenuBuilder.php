@@ -1,14 +1,15 @@
 <?php
 
-/**
- * Menu builder service
- */
-
 namespace Module7\MenuBundle\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
+/**
+ * Menu builder class
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
+ */
 class MenuBuilder
 {
     protected $requestStack;
@@ -71,6 +72,7 @@ class MenuBuilder
         $translationDomain = isset($options['translation_domain'])
             ? $options['translation_domain']
             : 'menu';
+        $menu->setTranslationDomain($translationDomain);
 
         if (isset($options['attributes'])) {
             $menu->setAttributes($options['attributes']);

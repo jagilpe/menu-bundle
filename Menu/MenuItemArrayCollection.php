@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Menu Item Collection backed up by a Doctrine\Common\Collections\ArrayCollection
  * The reason why we implement this wrapping class around the ArrayCollection class
  * is the need of type check, but we don't have an equivalent to the Java generics
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
 class MenuItemArrayCollection implements MenuItemCollection
 {

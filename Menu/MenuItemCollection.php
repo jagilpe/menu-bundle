@@ -2,6 +2,11 @@
 
 namespace Module7\MenuBundle\Menu;
 
+/**
+ * Basic interface for the MenuItemCollection
+ *
+ * @author Javier Gil Pereda <javier.gil@module-7.com>
+ */
 interface MenuItemCollection
 {
 
