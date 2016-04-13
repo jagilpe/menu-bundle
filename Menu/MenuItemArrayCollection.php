@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class MenuItemArrayCollection implements MenuItemCollection
 {
-
     /**
      * The ArrayCollection that backs all the functionality
      *

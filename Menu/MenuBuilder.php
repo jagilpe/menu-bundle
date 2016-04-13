@@ -51,14 +51,28 @@ class MenuBuilder
     /**
      * Creates a new menu item and adds it to the main container
      *
+     * @param array $options
      * @return Module7\MenuBundle\Menu\MenuBuilder
      */
     public function newMenuItem($options)
     {
-        $menuItem = new MenuItem($options);
+        $menuItem = $this->createMenuItem($options);
         $this->rootContainer->add($menuItem);
 
-        return $this;
+        return $menuItem;
+    }
+
+    /**
+     * Creates a new menu item
+     *
+     * @param array $options
+     * @return \Module7\MenuBundle\Menu\MenuBuilder
+     */
+    public function createMenuItem($options)
+    {
+        $menuItem = new MenuItem($options);
+
+        return $menuItem;
     }
 
     protected function createMenu(array $options = array())

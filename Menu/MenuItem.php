@@ -68,11 +68,12 @@ class MenuItem extends MenuItemArrayCollection
         // Set the default values
         $this->description = isset($options['description']) ? $options['description'] : null;
         $this->route = isset($options['route']) ? $options['route'] : null;
+        $this->routeParams = isset($options['route_params']) ? $options['route_params'] : array();
         $this->name = isset($options['name']) ? $options['name'] : null;
         $this->attributes = isset($options['attributes']) ? $options['attributes'] : null;
         $this->active = isset($options['active']) ? $options['active'] : false;
         $this->disabled = isset($options['disabled']) ? $options['disabled'] : false;
-        $this->hideChildren = isset($options['hideChildren']) ? $options['hideChildren'] : false;
+        $this->hideChildren = isset($options['hide_children']) ? $options['hide_children'] : false;
     }
 
     /**

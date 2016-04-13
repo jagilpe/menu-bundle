@@ -4,6 +4,7 @@ namespace Module7\MenuBundle\Renderer;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Module7\MenuBundle\Menu\Menu;
+use Module7\MenuBundle\Menu\MenuItem;
 
 /**
  * This class is used to get a rendered menu using different templates and options
