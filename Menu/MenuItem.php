@@ -59,6 +59,11 @@ class MenuItem extends MenuItemArrayCollection
     protected $attributes;
 
     /**
+     * @var unknown
+     */
+    protected $childrenRoutes = array();
+
+    /**
      * Initializes the MenuItem
      */
     public function __construct($options = array())
@@ -68,12 +73,13 @@ class MenuItem extends MenuItemArrayCollection
         // Set the default values
         $this->description = isset($options['description']) ? $options['description'] : null;
         $this->route = isset($options['route']) ? $options['route'] : null;
-        $this->routeParams = isset($options['route_params']) ? $options['route_params'] : array();
+        $this->routeParams = isset($options['route_params']) ? $options['route_params'] : $this->routeParams;
         $this->name = isset($options['name']) ? $options['name'] : null;
         $this->attributes = isset($options['attributes']) ? $options['attributes'] : null;
         $this->active = isset($options['active']) ? $options['active'] : false;
         $this->disabled = isset($options['disabled']) ? $options['disabled'] : false;
         $this->hideChildren = isset($options['hide_children']) ? $options['hide_children'] : false;
+        $this->childrenRoutes = isset($options['children_routes']) ? $options['children_routes'] : $this->childrenRoutes;
     }
 
     /**
@@ -286,7 +292,7 @@ class MenuItem extends MenuItemArrayCollection
     {
         $active = false;
 
-        if (in_array($this->getRoute(), $routes)) {
+        if ($this->checkActiveRoute($routes)) {
             $active = true;
 
             $this->addAttribute('class', 'active');
@@ -336,4 +342,32 @@ class MenuItem extends MenuItemArrayCollection
         return $this;
     }
 
+    public function getChildrenRoutes()
+    {
+        return $this->childrenRoutes;
+    }
+
+    public function setChildrenRoutes($childrenRoutes)
+    {
+        $this->childrenRoutes = $childrenRoutes;
+        return $this;
+    }
+
+    protected function checkActiveRoute($routes)
+    {
+        $active = false;
+        if (in_array($this->getRoute(), $routes)) {
+            $active = true;
+        }
+        else {
+            foreach ($this->getChildrenRoutes() as $children) {
+                if (in_array($children, $routes)) {
+                    $active = true;
+                    break;
+                }
+            }
+        }
+
+        return $active;
+    }
 }
