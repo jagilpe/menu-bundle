@@ -13,6 +13,10 @@ use Module7\MenuBundle\Menu\MenuItem;
  */
 class MenuRenderer
 {
+    const MENU_FULL = 'full';
+    const MENU_SUBMENU = 'submenu';
+    const MENU_SIDEBAR = 'sidebar';
+    const MENU_CUSTOM = 'custom';
 
     private $templating;
 
@@ -26,17 +30,17 @@ class MenuRenderer
 
         // Select the view to render
         switch ($view) {
-            case 'full':
+            case self::MENU_FULL:
                 return $this->renderFullMenu($menu, $options);
                 break;
-            case 'submenu':
+            case self::MENU_SUBMENU:
                 $options += array(
                     'type' => 'pills',
                     'stacked' => false,
                     'level' => 1,
                     'classes' => array(),
                 );
-            case 'sidebar':
+            case self::MENU_SIDEBAR:
                 $options += array(
                     'type' => 'pills',
                     'stacked' => true,
@@ -45,7 +49,7 @@ class MenuRenderer
                 );
                 return $this->renderNLevelMenu($menu, $options['level'], $options);
                 break;
-            case 'custom':
+            case self::MENU_CUSTOM:
                 return $this->renderCustomMenu($menu, $options);
             default:
                 throw new \RuntimeException('Menu view ' . $view . ' not supported.');
