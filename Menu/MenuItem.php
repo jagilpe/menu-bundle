@@ -59,9 +59,14 @@ class MenuItem extends MenuItemArrayCollection
     protected $attributes;
 
     /**
-     * @var unknown
+     * @var array
      */
     protected $childrenRoutes = array();
+
+    /**
+     * @var boolean
+     */
+    protected $linkFirstChild;
 
     /**
      * Initializes the MenuItem
@@ -80,6 +85,12 @@ class MenuItem extends MenuItemArrayCollection
         $this->disabled = isset($options['disabled']) ? $options['disabled'] : false;
         $this->hideChildren = isset($options['hide_children']) ? $options['hide_children'] : false;
         $this->childrenRoutes = isset($options['children_routes']) ? $options['children_routes'] : $this->childrenRoutes;
+        if (!$this->route) {
+            $this->linkFirstChild = isset($options['link_first_child']) ? $options['link_first_child'] : true;
+        }
+        else {
+            $this->linkFirstChild = false;
+        }
     }
 
     /**
@@ -133,7 +144,14 @@ class MenuItem extends MenuItemArrayCollection
      */
     public function getRoute()
     {
-        return $this->route;
+        if ($this->linkFirstChild) {
+            $firstChild = $this->first();
+
+            return $firstChild ? $firstChild->getRoute() : $this->route;
+        }
+        else {
+            return $this->route;
+        }
     }
 
     /**
@@ -155,7 +173,14 @@ class MenuItem extends MenuItemArrayCollection
      */
     public function getRouteParams()
     {
-        return $this->routeParams;
+        if ($this->linkFirstChild) {
+            $firstChild = $this->first();
+
+            return $firstChild ? $firstChild->getRouteParams() : $this->routeParams;
+        }
+        else {
+            return $this->routeParams;
+        }
     }
 
     /**
@@ -356,8 +381,8 @@ class MenuItem extends MenuItemArrayCollection
     protected function checkActiveRoute($routes)
     {
         $active = false;
-        if (in_array($this->getRoute(), $routes)) {
-            $active = true;
+        if ($this->route && in_array($this->route, $routes)) {
+                $active = true;
         }
         else {
             foreach ($this->getChildrenRoutes() as $children) {
