@@ -57,7 +57,7 @@ class MenuBuilder
     public function newMenuItem($options)
     {
         $menuItem = $this->createMenuItem($options);
-        $this->rootContainer->add($menuItem);
+        $this->addMenuItem($menuItem);
 
         return $menuItem;
     }
@@ -73,6 +73,16 @@ class MenuBuilder
         $menuItem = new MenuItem($options);
 
         return $menuItem;
+    }
+
+    /**
+     * Adds a menu item to the main container
+     *
+     * @param MenuItem $menuItem
+     */
+    public function addMenuItem(MenuItem $menuItem)
+    {
+        $this->rootContainer->add($menuItem);
     }
 
     protected function createMenu(array $options = array())
