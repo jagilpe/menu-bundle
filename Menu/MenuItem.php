@@ -359,7 +359,6 @@ class MenuItem extends MenuItemArrayCollection
 
     public function getNameParams()
     {
-        dump($this->nameParams);
         return $this->nameParams;
     }
 

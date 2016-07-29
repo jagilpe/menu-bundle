@@ -11,7 +11,11 @@
     	           {{ attr }}="{{ value|join(' ') }}"
     	       {% endfor %}
     	    {% endif %}>
-    	    <a href="{% if links.route %}{{ path(links.route, links.routeParams) }}{% if links.routeOptions.anchor %}#{{links.routeOptions.anchor}}{% endif %}{% else %}#{% if links.routeOptions.anchor %}{{links.routeOptions.anchor}}{% endif %}{% endif %}">{{ links.name|trans }}</a>
+    	    {% set url = links.route ? path(links.route, links.routeParams) :  '#' %}
+    	    {% if links.routeOptions.anchor %}
+    	    	{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor ? url ~ links.routeOptions.anchor %}
+    	    {% endif %}
+    	    <a href="{{ url }}">{{ links.name|trans(links.nameParams, 'menu')|raw }}</a>
 	    </li>
     {% endfor %}
     </ul>

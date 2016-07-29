@@ -68,6 +68,7 @@ class MenuRenderer
             'id' => 'full-menu',
             'type' => 'normal',
             'justified' => false,
+            'template' => 'Module7MenuBundle:Menu:navbar.html.twig',
         );
 
         $params = array(
@@ -75,7 +76,7 @@ class MenuRenderer
         );
 
         return $this->templating->renderResponse(
-            'Module7MenuBundle:Menu:navbar.html.twig',
+            $options['template'],
             array('menu' => $menu, 'params' => $params)
         );
     }
@@ -103,6 +104,7 @@ class MenuRenderer
             'type' => 'pills',
             'stacked' => false,
             'justified' => false,
+            'template' => 'Module7MenuBundle:Menu:nav.html.twig',
         );
 
         $ul_classes = array('nav');
@@ -123,7 +125,7 @@ class MenuRenderer
         $menu_item = $this->getRenderMenuItem($menu->getRootContainer(), $level);
 
         return $this->templating->renderResponse(
-            'Module7MenuBundle:Menu:nav.html.twig',
+            $options['template'],
             array('menu_item' => $menu_item, 'params' => $params, 'translation_domain' => $menu->getTranslationDomain())
         );
     }
