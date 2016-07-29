@@ -15,7 +15,7 @@
     	    {% if links.routeOptions.anchor %}
     	    	{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor ? url ~ links.routeOptions.anchor %}
     	    {% endif %}
-    	    <a href="{{ url }}">{{ links.name|trans(links.nameParams, 'menu')|raw }}</a>
+    	    <a href="{{ url }}">{{ links.name|trans(links.nameParams, translation_domain)|raw }}</a>
 	    </li>
     {% endfor %}
     </ul>
