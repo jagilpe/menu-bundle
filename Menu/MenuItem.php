@@ -80,6 +80,7 @@ class MenuItem extends MenuItemArrayCollection
         $this->route = isset($options['route']) ? $options['route'] : null;
         $this->routeParams = isset($options['route_params']) ? $options['route_params'] : $this->routeParams;
         $this->name = isset($options['name']) ? $options['name'] : null;
+        $this->nameParams = isset($options['name_params']) ? $options['name_params'] : array();
         $this->attributes = isset($options['attributes']) ? $options['attributes'] : null;
         $this->active = isset($options['active']) ? $options['active'] : false;
         $this->disabled = isset($options['disabled']) ? $options['disabled'] : false;
@@ -358,6 +359,7 @@ class MenuItem extends MenuItemArrayCollection
 
     public function getNameParams()
     {
+        dump($this->nameParams);
         return $this->nameParams;
     }
 
