@@ -379,6 +379,14 @@ class MenuItem extends MenuItemArrayCollection
         return $this;
     }
 
+    /**
+     * Returns the id of the attributes list if set
+     */
+    public function getId()
+    {
+        return isset($this->attributes['id']) ? $this->attributes['id'] : null;
+    }
+
     protected function checkActiveRoute($routes)
     {
         $active = false;
