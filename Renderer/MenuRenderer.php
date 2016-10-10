@@ -2,27 +2,32 @@
 
 namespace Module7\MenuBundle\Renderer;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Module7\MenuBundle\Menu\Menu;
 use Module7\MenuBundle\Menu\MenuItem;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * This class is used to get a rendered menu using different templates and options
  *
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
-class MenuRenderer
+class MenuRenderer implements ContainerAwareInterface
 {
     const MENU_FULL = 'full';
     const MENU_SUBMENU = 'submenu';
     const MENU_SIDEBAR = 'sidebar';
     const MENU_CUSTOM = 'custom';
 
-    private $templating;
+    private $container;
 
-    public function __construct(EngineInterface $templating)
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\DependencyInjection\ContainerAwareInterface::setContainer()
+     */
+    public function setContainer(ContainerInterface $container = null)
     {
-        $this->templating = $templating;
+        $this->container = $container;
     }
 
     public function renderMenu(Menu $menu = null, $view = 'full', $options = array())
@@ -75,7 +80,7 @@ class MenuRenderer
             'id' => $options['id'],
         );
 
-        return $this->templating->renderResponse(
+        return $this->container->get('templating')->render(
             $options['template'],
             array('menu' => $menu, 'params' => $params)
         );
@@ -124,7 +129,7 @@ class MenuRenderer
 
         $menu_item = $this->getRenderMenuItem($menu->getRootContainer(), $level);
 
-        return $this->templating->renderResponse(
+        return $this->container->get('templating')->render(
             $options['template'],
             array('menu_item' => $menu_item, 'params' => $params, 'translation_domain' => $menu->getTranslationDomain())
         );
@@ -142,7 +147,7 @@ class MenuRenderer
         if (isset($options['template'])) {
             $template = $options['template'];
 
-            return $this->templating->renderResponse(
+            return $this->container->get('templating')->render(
                 $template,
                 array('menu' => $menu, 'params' => $options)
             );

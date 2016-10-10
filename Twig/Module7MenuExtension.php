@@ -6,6 +6,8 @@ use Module7\ComponentsBundle\Twig\Functions\EntityElementRenderer;
 use Module7\MenuBundle\Service\MenuServiceInterface;
 use Module7\MenuBundle\Renderer\MenuRenderer;
 use Module7\MenuBundle\Provider\MenuProviderInterface;
+use Module7\MenuBundle\Menu\Menu;
+use Module7\MenuBundle\Exception\MenuException;
 
 /**
  *
@@ -24,9 +26,9 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
      */
     protected $menuRenderer;
 
-    public function __construct()
+    public function __construct(MenuRenderer $menuRenderer)
     {
-
+        $this->menuRenderer = $menuRenderer;
     }
 
     /**
@@ -46,6 +48,12 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
     {
         $functions = array();
 
+        $functions[] = new \Twig_SimpleFunction(
+                        'm7_menu',
+                        array($this, 'renderMenu'),
+                        array('is_safe' => array('html'),)
+                        );
+
         return $functions;
     }
 
@@ -57,5 +65,45 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
     public function addMenuProvider(MenuProviderInterface $menuProvider)
     {
         $this->menuProviders[] = $menuProvider;
+    }
+
+    /**
+     * Renders a view of a determined menu
+     *
+     * @param string $menuName
+     * @param string $menuView
+     * @param array $parameters
+     *
+     * @return string
+     */
+    public function renderMenu($menuName, $menuView = MenuRenderer::MENU_FULL, array $options = array())
+    {
+        $menu = $this->getMenu($menuName);
+        return $this->menuRenderer->renderMenu($menu, $menuView, $options);
+    }
+
+    /**
+     * Looks up for the menu in the different registrered menu providers
+     *
+     * @param string $menuName
+     *
+     * @return Menu
+     */
+    private function getMenu($menuName)
+    {
+        $menu = null;
+        foreach ($this->menuProviders as $menuProvider) {
+            $menu = $menuProvider->getMenu($menuName);
+
+            if ($menu) {
+                break;
+            }
+        }
+
+        if (!$menu) {
+            throw new MenuException("Menu $menuName does not exists.");
+        }
+
+        return $menu;
     }
 }

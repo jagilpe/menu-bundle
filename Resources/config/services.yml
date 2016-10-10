@@ -1,7 +1,8 @@
 services:
     m7_menu.menu.renderer:
         class: Module7\MenuBundle\Renderer\MenuRenderer
-        arguments: [ "@templating" ]
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
         
     m7_menu.menu_builder.factory:
         class: Module7\MenuBundle\Factory\MenuBuilderFactory
@@ -12,6 +13,8 @@ services:
     # Twig Extension
     m7_menu.twig_extension:
         class: Module7\MenuBundle\Twig\Module7MenuExtension
+        arguments:
+            - "@m7_menu.menu.renderer"
         public: false
         tags:
             - { name: twig.extension }
