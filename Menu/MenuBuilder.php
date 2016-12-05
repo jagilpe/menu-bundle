@@ -38,7 +38,7 @@ class MenuBuilder
     /**
      * Creates the Menu
      *
-     * @return Module7\MenuBundle\Menu\Menu
+     * @return Menu
      */
     public function getMenu()
     {
@@ -52,7 +52,7 @@ class MenuBuilder
      * Creates a new menu item and adds it to the main container
      *
      * @param array $options
-     * @return Module7\MenuBundle\Menu\MenuBuilder
+     * @return MenuItem
      */
     public function newMenuItem($options)
     {
@@ -66,7 +66,7 @@ class MenuBuilder
      * Creates a new menu item
      *
      * @param array $options
-     * @return \Module7\MenuBundle\Menu\MenuBuilder
+     * @return MenuItem
      */
     public function createMenuItem($options)
     {
