@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class Menu
 {
     /**
-     * @var Module7\CommonsBundle\Menu\MenuItemCollection
+     * @var MenuItemCollection
      */
     private $rootContainer;
 
@@ -21,14 +21,25 @@ class Menu
      */
     protected $name;
 
+    /**
+     * @var array
+     */
     protected $attributes;
 
+    /**
+     * @var string
+     */
     protected $translationDomain = 'menu';
+
+    /**
+     * @var string[]
+     */
+    protected $activeTrail;
 
     /**
      * Returns the root container of the menu
      *
-     * @return Module7\CommonsBundle\Menu\MenuItemCollection
+     * @return MenuItemCollection
      */
     public function getRootContainer()
     {
@@ -38,11 +49,13 @@ class Menu
     /**
      * Sets the root container of the menu
      *
-     * @param Module7\CommonsBundle\Menu\MenuItemCollection $root_container
+     * @param MenuItemCollection $rootContainer
+     *
+     * @return Menu
      */
-    public function setRootContainer(MenuItemCollection $root_container)
+    public function setRootContainer(MenuItemCollection $rootContainer)
     {
-        $this->rootContainer = $root_container;
+        $this->rootContainer = $rootContainer;
 
         return $this;
     }
@@ -54,33 +67,44 @@ class Menu
      */
     public function getName()
     {
-        return $name;
+        return $this->name;
     }
 
     /**
      * Sets the name of the menu
      *
      * @param string $name
+     * @return Menu
      */
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
-    public function setAttributes($attributes)
+    /**
+     * @param array $attributes
+     * @return Menu
+     */
+    public function setAttributes(array $attributes = array())
     {
         $this->attributes = $attributes;
-
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return Menu
+     */
     public function addAttribute($name, $value)
     {
 
@@ -90,8 +114,7 @@ class Menu
 
             }
             $this->attributes[$name][] = $value;
-        }
-        else {
+        } else {
             $this->attributes[$name] = $value;
         }
 
@@ -102,30 +125,51 @@ class Menu
      * Finds the active element of the menu from the current route and sets the correspondant
      * active trail
      *
-     * @param Symfony\Component\HttpFoundation\RequestStack $request_stack
+     * @param RequestStack $requestStack
      * The route that is active in this moment
      */
-    public function setActiveTrail(RequestStack $request_stack)
+    public function setActiveTrail(RequestStack $requestStack)
     {
-
-        $request_stack_copy = clone $request_stack;
+        $requestStackCopy = clone $requestStack;
         // Get the route from the request stack
-        $routes = array();
-        while ($request = $request_stack_copy->pop()) {
+        $this->activeTrail = array();
+        $routeNames = array();
+        while ($request = $requestStackCopy->pop()) {
             if ($route = $request->get('_route')) {
-                $routes[] = $route;
+                $routeNames[] = $route;
+                $this->activeTrail[] = array(
+                    'route' => $route,
+                    'route_params' => $request->get('_route_params'),
+                );
             }
         }
 
         // Sets the active trail in the children of the rootcontainer
-        $this->getRootContainer()->setActiveTrail($routes);
+        $this->getRootContainer()->setActiveTrail($routeNames);
     }
 
+    /**
+     * Returns the active trail
+     *
+     * @return string[]
+     */
+    public function getActiveTrail()
+    {
+        return $this->activeTrail;
+    }
+
+    /**
+     * @return string
+     */
     public function getTranslationDomain()
     {
         return $this->translationDomain;
     }
 
+    /**
+     * @param string $translationDomain
+     * @return Menu
+     */
     public function setTranslationDomain($translationDomain)
     {
         $this->translationDomain = $translationDomain;
