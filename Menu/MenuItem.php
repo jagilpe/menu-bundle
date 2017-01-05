@@ -311,14 +311,14 @@ class MenuItem extends MenuItemArrayCollection
      * Gets the active route from the request stack and sets this item as
      * active if it's equal to the route of the item or any of its children
      *
-     * @param array $routes
+     * @param array $routesData
      * @return boolean
      */
-    public function setActiveTrail($routes)
+    public function setActiveTrail($routesData)
     {
         $active = false;
 
-        if ($this->checkActiveRoute($routes)) {
+        if ($this->checkActiveRoute($routesData)) {
             $active = true;
 
             $this->addAttribute('class', 'active');
@@ -326,7 +326,7 @@ class MenuItem extends MenuItemArrayCollection
         else {
             // Check if any of the children of the menu item is the active one
             foreach ($this->toArray() as $child) {
-                $active = $active || $child->setActiveTrail($routes);
+                $active = $active || $child->setActiveTrail($routesData);
             }
         }
 
@@ -387,15 +387,41 @@ class MenuItem extends MenuItemArrayCollection
         return isset($this->attributes['id']) ? $this->attributes['id'] : null;
     }
 
-    protected function checkActiveRoute($routes)
+    protected function checkActiveRoute($activeRoutesData)
     {
         $active = false;
-        if ($this->route && in_array($this->route, $routes)) {
-                $active = true;
+
+        $menuItem = $this;
+        if ($this->route) {
+            $matchedRoutes = array_filter($activeRoutesData, function($activeRouteData) use($menuItem) {
+                $matched = false;
+                $activeRoute = $activeRouteData['route'];
+                $activeRouteParams = $activeRouteData['route_params'];
+                if ($activeRoute === $menuItem->getRoute()) {
+                    if (empty($menuItem->getRouteParams())) {
+                        $matched = true;
+                    } else {
+                        $matched = true;
+                        foreach ($menuItem->getRouteParams() as $paramName => $param) {
+                            if (!isset($activeRouteParams[$paramName]) || $activeRouteParams[$paramName] != $param) {
+                                $matched = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                return $matched;
+            });
+
+            $active = !empty($matchedRoutes);
         }
-        else {
+
+        if (!$active) {
             foreach ($this->getChildrenRoutes() as $children) {
-                if (in_array($children, $routes)) {
+                $matchedRoutes = array_filter($activeRoutesData, function($activeRouteData) use($children) {
+                    return $activeRouteData['route'] === $children;
+                });
+                if (!empty($matchedRoutes)) {
                     $active = true;
                     break;
                 }

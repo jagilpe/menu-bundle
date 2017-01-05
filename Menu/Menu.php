@@ -133,10 +133,9 @@ class Menu
         $requestStackCopy = clone $requestStack;
         // Get the route from the request stack
         $this->activeTrail = array();
-        $routeNames = array();
+        $routesData = array();
         while ($request = $requestStackCopy->pop()) {
             if ($route = $request->get('_route')) {
-                $routeNames[] = $route;
                 $this->activeTrail[] = array(
                     'route' => $route,
                     'route_params' => $request->get('_route_params'),
@@ -145,7 +144,7 @@ class Menu
         }
 
         // Sets the active trail in the children of the rootcontainer
-        $this->getRootContainer()->setActiveTrail($routeNames);
+        $this->getRootContainer()->setActiveTrail($this->activeTrail);
     }
 
     /**
