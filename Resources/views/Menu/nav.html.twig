@@ -5,19 +5,21 @@
 
 <div role="navigation" {% if params.classes and params.classes is not empty %}class="{{ params.classes|join(' ') }}"{% endif %}>
 	<ul class="{{ params.ul_classes|join(' ') }}">
-    {% for links in menu_item.menuItems %}
-    	<li {% if links.attributes %}
-    	       {% for attr, value in links.attributes %}
-    	           {{ attr }}="{{ value|join(' ') }}"
-    	       {% endfor %}
-    	    {% endif %}>
-    	    {% set url = links.route ? path(links.route, links.routeParams) :  '#' %}
-    	    {% if links.routeOptions.anchor %}
-    	    	{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor : url ~ links.routeOptions.anchor %}
-    	    {% endif %}
-    	    <a href="{{ url }}">{{ links.name|trans(links.nameParams, translation_domain)|raw }}</a>
-	    </li>
-    {% endfor %}
-    </ul>
+	{% if menu_item %}
+		{% for links in menu_item.menuItems %}
+			<li {% if links.attributes %}
+					{% for attr, value in links.attributes %}
+						{{ attr }}="{{ value|join(' ') }}"
+					{% endfor %}
+				{% endif %}>
+				{% set url = links.route ? path(links.route, links.routeParams) :  '#' %}
+				{% if links.routeOptions.anchor %}
+					{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor : url ~ links.routeOptions.anchor %}
+				{% endif %}
+				<a href="{{ url }}">{{ links.name|trans(links.nameParams, translation_domain)|raw }}</a>
+			</li>
+		{% endfor %}
+	{% endif %}
+	</ul>
 </div>
 
