@@ -13,7 +13,7 @@
     	    {% endif %}>
     	    {% set url = links.route ? path(links.route, links.routeParams) :  '#' %}
     	    {% if links.routeOptions.anchor %}
-    	    	{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor ? url ~ links.routeOptions.anchor %}
+    	    	{% set url = links.route ? url ~ '#' ~ links.routeOptions.anchor : url ~ links.routeOptions.anchor %}
     	    {% endif %}
     	    <a href="{{ url }}">{{ links.name|trans(links.nameParams, translation_domain)|raw }}</a>
 	    </li>
