@@ -1,18 +1,13 @@
 {
-    "name": "module7/menu",
+    "name": "jagilpe/menu-bundle",
     "type": "symfony-bundle",
-    "description": "Module 7 Menu Bundle",
-    "keywords": ["Module7 Menu"],
-    "homepage": "https://www.module-7.com",
+    "description": "A Symfony Bundle to build Bootstrap based menus for Web Apps",
+    "keywords": ["Symfony Menu"],
     "license": "MIT",
     "authors": [
         {
             "name": "Javier Gil",
             "email": "javier.gil@module-7.com"
-        },
-        {
-            "name": "Module-7",
-            "homepage": "https://www.module-7.com"
         }
     ],
     "require": {
@@ -25,14 +20,8 @@
         "phpunit/phpunit": "^5.5"
     },
     "autoload": {
-        "psr-0": { "Module7\\MenuBundle\\": "" }
+        "psr-4": { "Jagilpe\\MenuBundle\\": "" }
     },
-    
-    "target-dir": "Module7/MenuBundle",
-    
-    "extra": {
-        "branch-alias": {
-            "dev-master": "dev-master"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
