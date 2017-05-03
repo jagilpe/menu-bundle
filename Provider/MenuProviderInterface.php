@@ -1,8 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Provider;
-
-use Module7\MenuBundle\Menu\Menu;
+namespace Jagilpe\MenuBundle\Provider;
 
 /**
  *
@@ -16,9 +14,9 @@ interface MenuProviderInterface
      *
      * @param string $menuName
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      *
-     * @return \Module7\Menu\Menu
+     * @return \Jagilpe\MenuBundle\Menu\Menu
      */
     public function getMenu($menuName);
 }

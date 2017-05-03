@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\DependencyInjection;
+namespace Jagilpe\MenuBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
-class Module7MenuExtension extends Extension
+class JagilpeMenuExtension extends Extension
 {
     /**
      * {@inheritdoc}

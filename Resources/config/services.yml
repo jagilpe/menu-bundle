@@ -1,20 +1,20 @@
 services:
-    m7_menu.menu.renderer:
-        class: Module7\MenuBundle\Renderer\MenuRenderer
+    jgp_menu.menu.renderer:
+        class: Jagilpe\MenuBundle\Renderer\MenuRenderer
         calls:
             - [ setContainer, [ "@service_container" ] ]
         
-    m7_menu.menu_builder.factory:
-        class: Module7\MenuBundle\Factory\MenuBuilderFactory
+    jgp_menu.menu_builder.factory:
+        class: Jagilpe\MenuBundle\Factory\MenuBuilderFactory
         arguments:
           - "@request_stack"
           - "@router"   
                
     # Twig Extension
-    m7_menu.twig_extension:
-        class: Module7\MenuBundle\Twig\Module7MenuExtension
+    jgp_menu.twig_extension:
+        class: Jagilpe\MenuBundle\Twig\JagilpeMenuExtension
         arguments:
-            - "@m7_menu.menu.renderer"
+            - "@jgp_menu.menu.renderer"
         public: false
         tags:
             - { name: twig.extension }

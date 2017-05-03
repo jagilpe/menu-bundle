@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Exception;
+namespace Jagilpe\MenuBundle\Exception;
 
 /**
  * Base exception for the exceptions in  MenuBundle

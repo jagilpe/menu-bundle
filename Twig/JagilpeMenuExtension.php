@@ -1,19 +1,17 @@
 <?php
 
-namespace Module7\MenuBundle\Twig;
+namespace Jagilpe\MenuBundle\Twig;
 
-use Module7\ComponentsBundle\Twig\Functions\EntityElementRenderer;
-use Module7\MenuBundle\Service\MenuServiceInterface;
-use Module7\MenuBundle\Renderer\MenuRenderer;
-use Module7\MenuBundle\Provider\MenuProviderInterface;
-use Module7\MenuBundle\Menu\Menu;
-use Module7\MenuBundle\Exception\MenuException;
+use Jagilpe\MenuBundle\Renderer\MenuRenderer;
+use Jagilpe\MenuBundle\Provider\MenuProviderInterface;
+use Jagilpe\MenuBundle\Menu\Menu;
+use Jagilpe\MenuBundle\Exception\MenuException;
 
 /**
  *
  * @author Javier Gil Pereda <javier.gil@module-7.com>
  */
-class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class JagilpeMenuExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      * @var array
@@ -37,7 +35,7 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
      */
     public function getName()
     {
-        return 'module7_menu_bundle_extension';
+        return 'jagilpe_menu_bundle_extension';
     }
 
     /**
@@ -49,7 +47,7 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
         $functions = array();
 
         $functions[] = new \Twig_SimpleFunction(
-                        'm7_menu',
+                        'jgp_menu',
                         array($this, 'renderMenu'),
                         array('is_safe' => array('html'),)
                         );
@@ -72,7 +70,7 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
      *
      * @param string $menuName
      * @param string $menuView
-     * @param array $parameters
+     * @param array $options
      *
      * @return string
      */
@@ -86,8 +84,8 @@ class Module7MenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
      * Looks up for the menu in the different registrered menu providers
      *
      * @param string $menuName
-     *
      * @return Menu
+     * @throws MenuException
      */
     private function getMenu($menuName)
     {

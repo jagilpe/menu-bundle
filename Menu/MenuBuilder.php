@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Menu;
+namespace Jagilpe\MenuBundle\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;

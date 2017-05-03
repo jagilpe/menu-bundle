@@ -1,9 +1,9 @@
 <?php
 
-namespace Module7\MenuBundle\Renderer;
+namespace Jagilpe\MenuBundle\Renderer;
 
-use Module7\MenuBundle\Menu\Menu;
-use Module7\MenuBundle\Menu\MenuItem;
+use Jagilpe\MenuBundle\Menu\Menu;
+use Jagilpe\MenuBundle\Menu\MenuItem;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -36,7 +36,6 @@ class MenuRenderer implements ContainerAwareInterface
         switch ($view) {
             case self::MENU_FULL:
                 return $this->renderFullMenu($menu, $options);
-                break;
             case self::MENU_SUBMENU:
                 $options += array(
                     'type' => 'pills',
@@ -44,6 +43,7 @@ class MenuRenderer implements ContainerAwareInterface
                     'level' => 1,
                     'classes' => array(),
                 );
+                return $this->renderNLevelMenu($menu, $options['level'], $options);
             case self::MENU_SIDEBAR:
                 $options += array(
                     'type' => 'pills',
@@ -52,7 +52,6 @@ class MenuRenderer implements ContainerAwareInterface
                     'classes' => array(),
                 );
                 return $this->renderNLevelMenu($menu, $options['level'], $options);
-                break;
             case self::MENU_CUSTOM:
                 return $this->renderCustomMenu($menu, $options);
             default:
@@ -75,7 +74,7 @@ class MenuRenderer implements ContainerAwareInterface
             'id' => 'full-menu',
             'type' => 'normal',
             'justified' => false,
-            'template' => 'Module7MenuBundle:Menu:navbar.html.twig',
+            'template' => 'JagilpeMenuBundle:Menu:navbar.html.twig',
         );
 
         $params = array(
@@ -89,7 +88,7 @@ class MenuRenderer implements ContainerAwareInterface
     }
 
     /**
-     * Returns a renderd block for the first level elements of the menu
+     * Returns a rendered block for the first level elements of the menu
      *
      * @param Menu $menu
      * @param array $options
@@ -117,7 +116,7 @@ class MenuRenderer implements ContainerAwareInterface
             'type' => 'pills',
             'stacked' => false,
             'justified' => false,
-            'template' => 'Module7MenuBundle:Menu:nav.html.twig',
+            'template' => 'JagilpeMenuBundle:Menu:nav.html.twig',
         );
 
         $ulClasses = array('nav');

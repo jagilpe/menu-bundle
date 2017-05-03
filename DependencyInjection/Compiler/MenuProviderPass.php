@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\DependencyInjection\Compiler;
+namespace Jagilpe\MenuBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -16,13 +16,13 @@ class MenuProviderPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         // Check if the list factory is defined
-        if (!$container->has('m7_menu.twig_extension')) {
+        if (!$container->has('jgp_menu.twig_extension')) {
             return;
         }
 
-        $definition = $container->findDefinition('m7_menu.twig_extension');
+        $definition = $container->findDefinition('jgp_menu.twig_extension');
 
-        $taggedServices = $container->findTaggedServiceIds('m7_menu.service_provider');
+        $taggedServices = $container->findTaggedServiceIds('jgp_menu.service_provider');
 
         foreach ($taggedServices as $id => $tags) {
             $definition->addMethodCall('addMenuProvider', array(new Reference($id)));

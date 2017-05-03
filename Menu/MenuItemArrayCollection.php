@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Menu;
+namespace Jagilpe\MenuBundle\Menu;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -16,7 +16,7 @@ class MenuItemArrayCollection implements MenuItemCollection
     /**
      * The ArrayCollection that backs all the functionality
      *
-     * @var Doctrine\Common\Collections\ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $collection;
 
@@ -195,7 +195,7 @@ class MenuItemArrayCollection implements MenuItemCollection
      */
     public function map(\Closure $func)
     {
-        return $this->collection->map($p);
+        return $this->collection->map($func);
     }
 
     /**

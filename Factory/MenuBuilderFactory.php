@@ -1,11 +1,11 @@
 <?php
 
-namespace Module7\MenuBundle\Factory;
+namespace Jagilpe\MenuBundle\Factory;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Module7\MenuBundle\Menu\MenuBuilder;
-use Module7\MenuBundle\Menu\MenuItem;
+use Jagilpe\MenuBundle\Menu\MenuBuilder;
+use Jagilpe\MenuBundle\Menu\MenuItem;
 
 /**
  * Menu builder factory
@@ -38,7 +38,7 @@ class MenuBuilderFactory
      *
      * @param array $options
      *
-     * @return \Module7\MenuBundle\Menu\MenuItem
+     * @return \Jagilpe\MenuBundle\Menu\MenuItem
      */
     public function createMenuItem(array $options = array())
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Module7\MenuBundle\Menu;
+namespace Jagilpe\MenuBundle\Menu;
 
 /**
  * @author Javier Gil Pereda <javier.gil@module-7.com>
@@ -108,6 +108,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the name of the menu item
      *
      * @param string $name
+     * @return MenuItem
      */
     public function setName($name)
     {
@@ -130,6 +131,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the description of the menu item
      *
      * @param string $description
+     * @return MenuItem
      */
     public function setDescription($description)
     {
@@ -159,6 +161,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the destination route of the menu item
      *
      * @param string $route
+     * @return MenuItem
      */
     public function setRoute($route)
     {
@@ -188,6 +191,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the params for the destination route of the menu item
      *
      * @param array $route_params
+     * @return MenuItem
      */
     public function setRouteParams($route_params)
     {
@@ -210,6 +214,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the options for the destination route of the menu item
      *
      * @param string $route
+     * @return MenuItem
      */
     public function setRouteOptions($route_options)
     {
@@ -230,6 +235,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the active status link of the menu item
      *
      * @param boolean $active
+     * @return MenuItem
      */
     public function setActive($active)
     {
@@ -250,6 +256,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the disable status link of the menu item
      *
      * @param string $link
+     * @return MenuItem
      */
     public function setDisabled($disabled)
     {
@@ -270,6 +277,7 @@ class MenuItem extends MenuItemArrayCollection
      * Sets the disable status link of the menu item
      *
      * @param string $hide_children
+     * @return MenuItem
      */
     public function setHideChildren($hide_children)
     {
@@ -338,23 +346,23 @@ class MenuItem extends MenuItemArrayCollection
     /**
      * Returns the active element of the menu item or the first if no one is active
      *
-     * @return
+     * @return MenuItem
      */
     public function getActiveChild()
     {
         $found = false;
 
-        $menu_item = $this->first();
-        while(!$found && $menu_item) {
-            if ($menu_item->isActive()) {
-                $active_menu_item = $menu_item;
+        $menuItem = $this->first();
+        while(!$found && $menuItem) {
+            if ($menuItem->isActive()) {
+                $activeMenuItem = $menuItem;
                 $found = true;
             }
 
-            $menu_item = $this->next();
+            $menuItem = $this->next();
         }
 
-        return $found ? $active_menu_item : $this->first();
+        return $found ? $activeMenuItem : $this->first();
     }
 
     public function getNameParams()

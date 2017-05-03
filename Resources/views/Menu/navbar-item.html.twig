@@ -17,7 +17,7 @@
 	<ul class="dropdown-menu">
 	{% for menu_child in children %}
       {# Include the template for the menu item element #}
-      {% include 'Module7MenuBundle:Menu:navbar-item.html.twig' with {'menu_item' : menu_child} %}
+      {% include 'JagilpeMenuBundle:Menu:navbar-item.html.twig' with {'menu_item' : menu_child} %}
       {% endfor %}
 	</ul>
 </li>
