@@ -81,7 +81,7 @@ class JagilpeMenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
     }
 
     /**
-     * Looks up for the menu in the different registrered menu providers
+     * Looks up for the menu in the different registered menu providers
      *
      * @param string $menuName
      * @return Menu
