@@ -15,6 +15,7 @@ services:
         class: Jagilpe\MenuBundle\Twig\JagilpeMenuExtension
         arguments:
             - "@jgp_menu.menu.renderer"
+            - "@jgp_menu.menu_builder.factory"
         public: false
         tags:
             - { name: twig.extension }

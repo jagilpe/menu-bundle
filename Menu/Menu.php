@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class Menu
 {
     /**
+     * @var string
+     */
+    private $homeRoute;
+
+    /**
      * @var MenuItemCollection
      */
     private $rootContainer;
@@ -57,6 +62,29 @@ class Menu
     {
         $this->rootContainer = $rootContainer;
 
+        return $this;
+    }
+
+    /**
+     * Returns the name of the route that will be set as home page
+     *
+     * @return string
+     */
+    public function getHomeRoute()
+    {
+        return $this->homeRoute;
+    }
+
+    /**
+     * Returns the name of the route that will be set as home page
+     *
+     * @param string $homeRoute
+     * 
+     * @return Menu
+     */
+    public function setHomeRoute($homeRoute)
+    {
+        $this->homeRoute = $homeRoute;
         return $this;
     }
 

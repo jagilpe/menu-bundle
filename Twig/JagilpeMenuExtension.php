@@ -2,6 +2,8 @@
 
 namespace Jagilpe\MenuBundle\Twig;
 
+use Jagilpe\MenuBundle\Factory\MenuBuilderFactory;
+use Jagilpe\MenuBundle\Provider\MenuProviderFactoryAwareInterface;
 use Jagilpe\MenuBundle\Renderer\MenuRenderer;
 use Jagilpe\MenuBundle\Provider\MenuProviderInterface;
 use Jagilpe\MenuBundle\Menu\Menu;
@@ -19,14 +21,20 @@ class JagilpeMenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
     protected $menuProviders = array();
 
     /**
+     * @var MenuBuilderFactory
+     */
+    protected $menuFactory;
+
+    /**
      *
      * @var MenuRenderer
      */
     protected $menuRenderer;
 
-    public function __construct(MenuRenderer $menuRenderer)
+    public function __construct(MenuRenderer $menuRenderer, MenuBuilderFactory $menuFactory)
     {
         $this->menuRenderer = $menuRenderer;
+        $this->menuFactory = $menuFactory;
     }
 
     /**
@@ -62,6 +70,10 @@ class JagilpeMenuExtension extends \Twig_Extension implements \Twig_Extension_Gl
      */
     public function addMenuProvider(MenuProviderInterface $menuProvider)
     {
+        // If the menu provider is an instance of AbstractMenuProvider inject the Menu Builder Factory
+        if ($menuProvider instanceof MenuProviderFactoryAwareInterface) {
+            $menuProvider->setMenuFactory($this->menuFactory);
+        }
         $this->menuProviders[] = $menuProvider;
     }
 
