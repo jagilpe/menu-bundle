@@ -1,4 +1,7 @@
 {% set link = menu_item.route ? path(menu_item.route, menu_item.routeParams) : '#' %}
+{% if menu_item.routeOptions.anchor %}
+    {% set link = menu_item.route ? link ~ '#' ~ menu_item.routeOptions.anchor : link ~ menu_item.routeOptions.anchor %}
+{% endif %}
 {% set children = menu_item.hideChildren ? [] : menu_item.menuItems %}
 {% set classes = (menu_item.attributes and menu_item.attributes.class) ? (menu_item.attributes.class is iterable ? menu_item.attributes.class : [menu_item.attributes.class]) : [] %}
 {% set classes = menu_item.active ? classes|merge(['active']) : classes %}
